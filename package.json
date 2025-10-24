@@ -1,0 +1,12 @@
+{
+  "name": "ptud2-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --prefix frontend",
+    "dev": "npm run dev --prefix frontend",
+    "lint": "npm run lint --prefix frontend"
+  },
+  "dependencies": {
+    "next": "^15.5.5"
+  }
+}
