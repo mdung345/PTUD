@@ -1,15 +1,15 @@
 {
-  "installCommand": "npm install --prefix frontend",
-  "buildCommand": "npm run build --prefix frontend",
-  "outputDirectory": "frontend/.next",
-  "framework": "nextjs",
+  "installCommand": "if [ -f package.json ]; then npm install; elif [ -f frontend/package.json ]; then npm install --prefix frontend; fi",
+  "buildCommand": "if [ -f package.json ]; then npm run build; elif [ -f frontend/package.json ]; then npm run build --prefix frontend; fi",
   "env": {
     "NEXT_PUBLIC_API_BASE_URL": "https://ptud2-nd.onrender.com"
   },
   "builds": [
+    { "src": "frontend/package.json", "use": "@vercel/next" },
     { "src": "backend/api/index.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "backend/api/index.py" }
+    { "src": "/api/(.*)", "dest": "backend/api/index.py" },
+    { "src": "/(.*)", "dest": "frontend/$1" }
   ]
 }
